@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Chocolate Day Maalkin!</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap');
+
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            overflow: hidden; 
+            background: #2d1a12; /* Rich Dark Chocolate Background */
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+        }
+
+        /* Animated Chocolate Background Overlay */
+        .bg-overlay {
+            position: fixed; inset: 0;
+            background: url('http://googleusercontent.com/image_generation_content/0');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.2;
+            z-index: 1;
+        }
+
+        .main-container {
+            position: relative; z-index: 10;
+            height: 100vh; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center; padding: 20px;
+        }
+
+        .note-box {
+            background: rgba(62, 39, 35, 0.9);
+            border: 3px solid #795548;
+            padding: 30px; border-radius: 25px;
+            max-width: 600px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            margin-bottom: 40px;
+            animation: bounceIn 1s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        h2 { font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #ffab91; margin-bottom: 15px; }
+        p { font-size: 1.2rem; line-height: 1.6; font-weight: 600; text-transform: uppercase; }
+
+        .chocolate-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 20px; max-width: 400px;
+        }
+
+        .choco {
+            font-size: 50px; cursor: pointer; transition: transform 0.2s, opacity 0.3s;
+            user-select: none;
+        }
+
+        .choco:hover { transform: scale(1.2) rotate(10deg); }
+        .choco.eaten { transform: scale(0); opacity: 0; pointer-events: none; }
+
+        #yummyMsg {
+            position: fixed; bottom: 50px; left: 50%; transform: translateX(-50%);
+            background: #4e342e; color: #fff; padding: 10px 30px;
+            border-radius: 50px; font-weight: bold; font-size: 1.2rem;
+            display: none; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        .mustang-choco {
+            position: absolute; width: 80px; bottom: 20px; right: 20px;
+            filter: sepia(1) saturate(5) hue-rotate(-20deg);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-overlay"></div>
+
+    <div class="main-container">
+        <div class="note-box">
+            <h2>Hiiii Meri Jaan! ❤️</h2>
+            <p>
+                WAISE TOH MERI MAALKIN MERI JAAN CHOCOLATE SE BHI ZYADAAAAAA SWEET HAI PAR STILL...<br><br>
+                <span style="color: #ffccbc; font-size: 1.8rem;">HAPPY CHOCOLATE DAY MERI JAAN MERI KUCCHUU PUCCHU BADMASSSS MWAAAAAAAAAHHH!</span>
+            </p>
+        </div>
+
+        <h3 style="margin-bottom: 20px;">Tap the chocolates to eat them! 🍫</h3>
+        
+        <div class="chocolate-grid">
+            <div class="choco" onclick="eat(this)">🍫</div>
+            <div class="choco" onclick="eat(this)">🍩</div>
+            <div class="choco" onclick="eat(this)">🍪</div>
+            <div class="choco" onclick="eat(this)">🍮</div>
+            <div class="choco" onclick="eat(this)">🍬</div>
+            <div class="choco" onclick="eat(this)">🍭</div>
+            <div class="choco" onclick="eat(this)">🍦</div>
+            <div class="choco" onclick="eat(this)">🧁</div>
+            <div class="choco" onclick="eat(this)">🍰</div>
+        </div>
+    </div>
+
+    <div id="yummyMsg">Yeh toh bohttt yummy hai yayayayayyay! 😋</div>
+
+    <script>
+        let eatenCount = 0;
+        const total = 9;
+
+        function eat(element) {
+            element.classList.add('eaten');
+            eatenCount++;
+            
+            // Show the yummy message
+            const msg = document.getElementById('yummyMsg');
+            msg.style.display = 'block';
+            setTimeout(() => { msg.style.display = 'none'; }, 1000);
+
+            // Fun confetti for every bite
+            confetti({
+                particleCount: 30,
+                spread: 70,
+                origin: { y: 0.8 },
+                colors: ['#3e2723', '#5d4037', '#795548', '#ffab91']
+            });
+
+            // If all are eaten
+            if (eatenCount === total) {
+                setTimeout(() => {
+                    document.querySelector('.main-container').innerHTML = `
+                        <div class="note-box" style="animation: bounceIn 1s ease;">
+                            <h2>Sari Chocolate Khatam! 😋</h2>
+                            <p>Ab real wali chocolate mangwa lo apni Maalkin ke liye!</p>
+                            <div style="font-size: 5rem;">😘🍫❤️</div>
+                        </div>
+                    `;
+                    confetti({
+                        particleCount: 150,
+                        spread: 100,
+                        origin: { y: 0.6 }
+                    });
+                }, 1000);
+            }
+        }
+    </script>
+</body>
+</html>
