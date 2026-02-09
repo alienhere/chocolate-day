@@ -16,10 +16,9 @@
             color: #fff;
         }
 
-        /* Animated Chocolate Background Overlay */
         .bg-overlay {
             position: fixed; inset: 0;
-            background: url('http://googleusercontent.com/image_generation_content/0');
+            background: url('https://images.unsplash.com/photo-1548907040-4baa42d10919?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');
             background-size: cover;
             background-position: center;
             opacity: 0.2;
@@ -50,7 +49,7 @@
         }
 
         h2 { font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #ffab91; margin-bottom: 15px; }
-        p { font-size: 1.2rem; line-height: 1.6; font-weight: 600; text-transform: uppercase; }
+        p { font-size: 1.1rem; line-height: 1.6; font-weight: 600; text-transform: uppercase; }
 
         .chocolate-grid {
             display: grid; grid-template-columns: repeat(3, 1fr);
@@ -68,14 +67,9 @@
         #yummyMsg {
             position: fixed; bottom: 50px; left: 50%; transform: translateX(-50%);
             background: #4e342e; color: #fff; padding: 10px 30px;
-            border-radius: 50px; font-weight: bold; font-size: 1.2rem;
+            border-radius: 50px; font-weight: bold; font-size: 1.1rem;
             display: none; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             z-index: 100;
-        }
-
-        .mustang-choco {
-            position: absolute; width: 80px; bottom: 20px; right: 20px;
-            filter: sepia(1) saturate(5) hue-rotate(-20deg);
         }
     </style>
 </head>
@@ -83,12 +77,12 @@
 
     <div class="bg-overlay"></div>
 
-    <div class="main-container">
+    <div class="main-container" id="gameContainer">
         <div class="note-box">
             <h2>Hiiii Meri Jaan! ❤️</h2>
             <p>
                 WAISE TOH MERI MAALKIN MERI JAAN CHOCOLATE SE BHI ZYADAAAAAA SWEET HAI PAR STILL...<br><br>
-                <span style="color: #ffccbc; font-size: 1.8rem;">HAPPY CHOCOLATE DAY MERI JAAN MERI KUCCHUU PUCCHU BADMASSSS MWAAAAAAAAAHHH!</span>
+                <span style="color: #ffccbc; font-size: 1.6rem;">HAPPY CHOCOLATE DAY MERI JAAN MERI KUCCHUU PUCCHU BADMASSSS MWAAAAAAAAHHH!</span>
             </p>
         </div>
 
@@ -117,12 +111,10 @@
             element.classList.add('eaten');
             eatenCount++;
             
-            // Show the yummy message
             const msg = document.getElementById('yummyMsg');
             msg.style.display = 'block';
-            setTimeout(() => { msg.style.display = 'none'; }, 1000);
+            setTimeout(() => { msg.style.display = 'none'; }, 800);
 
-            // Fun confetti for every bite
             confetti({
                 particleCount: 30,
                 spread: 70,
@@ -130,19 +122,20 @@
                 colors: ['#3e2723', '#5d4037', '#795548', '#ffab91']
             });
 
-            // If all are eaten
             if (eatenCount === total) {
                 setTimeout(() => {
-                    document.querySelector('.main-container').innerHTML = `
+                    document.getElementById('gameContainer').innerHTML = `
                         <div class="note-box" style="animation: bounceIn 1s ease;">
                             <h2>Sari Chocolate Khatam! 😋</h2>
-                            <p>Ab real wali chocolate mangwa lo apni Maalkin ke liye!</p>
-                            <div style="font-size: 5rem;">😘🍫❤️</div>
+                            <p style="color: #ffccbc; font-size: 1.3rem;">
+                                AB MERIII JAAN MKO BATAAA DENAA MERIII JAANU KO REAL WALI CHOCOLATE BHI ORDER KARWANI HO TOH HEHEHEHE MWAAAAAHHHH I LOVEEEE YOUUUU
+                            </p>
+                            <div style="font-size: 5rem; margin-top: 20px;">😘🍫❤️</div>
                         </div>
                     `;
                     confetti({
-                        particleCount: 150,
-                        spread: 100,
+                        particleCount: 200,
+                        spread: 120,
                         origin: { y: 0.6 }
                     });
                 }, 1000);
